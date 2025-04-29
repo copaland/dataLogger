@@ -1,24 +1,19 @@
-void setupWiFi() {
-  if (strlen(config.wifi_ssid) > 0) {
-    WiFi.begin(config.wifi_ssid, config.wifi_password);
-    
-    int attempts = 0;
-    while (WiFi.status() != WL_CONNECTED && attempts < 20) {
-      delay(500);
-      Serial.print(".");
-      attempts++;
-    }
-    
-    if (WiFi.status() == WL_CONNECTED) {
-      Serial.println("\nConnected to WiFi");
-      Serial.println(WiFi.localIP());
-    } else {
-      Serial.println("\nFailed to connect to WiFi");
-    }
-  }
-}
+#include "WiFi.h"
+#include <cstring> // For strlen
 
-void sendPushNotification() {
-  // Implement push notification logic here
-  // You might want to use services like Firebase Cloud Messaging, IFTTT, or custom implementation
+extern Config config; // Ensure config is declared as extern
+
+void setupWiFi() {
+    if (strlen(config.wifi_ssid) > 0) {
+        WiFi.begin(config.wifi_ssid, config.wifi_password);
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.print(".");
+        }
+        Serial.println("\nWiFi connected");
+        Serial.println("IP address: ");
+        Serial.println(WiFi.localIP());
+    } else {
+        Serial.println("WiFi SSID is not set!");
+    }
 }

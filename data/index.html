@@ -198,9 +198,13 @@
                     <hr>
                     <h4>Logger Settings</h4>
                     <div class="form-group">
-                        <label for="logInterval">Log Interval (minutes)</label>
-                        <input type="number" class="form-control" id="logInterval" min="1" max="60" value="10">
-                    </div>
+			<label for="logInterval">Log Interval (minutes)</label>
+    			<input type="number" class="form-control" id="logInterval" min="1" max="60" value="10">
+		    </div>
+		    <div class="form-group">
+    			<label for="alarmTemperature">Alarm Temperature Threshold (°C)</label>
+    			<input type="number" class="form-control" id="alarmTemperature" value="-150.0">
+		    </div>
                     <button type="submit" class="btn btn-primary">Save Settings</button>
                 </div>
             </div>

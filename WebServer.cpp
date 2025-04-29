@@ -64,16 +64,17 @@ void handleUpdateConfig() {
     if (server.hasArg("plain")) {
         StaticJsonDocument<1024> doc;
         DeserializationError error = deserializeJson(doc, server.arg("plain"));
-        
+
         if (error) {
             server.send(400, "text/plain", "Invalid JSON");
             return;
         }
 
-        Config config;
+        // Update configuration
         strlcpy(config.wifi_ssid, doc["wifi_ssid"] | "", sizeof(config.wifi_ssid));
         strlcpy(config.wifi_password, doc["wifi_password"] | "", sizeof(config.wifi_password));
-        config.log_interval = doc["log_interval"] | 600;
+        config.log_interval = doc["log_interval"] | 10;
+        config.alarm_temperature = doc["alarm_temperature"] | -150.0;
 
         saveConfig();
         server.send(200, "application/json", "{\"success\":true}");

@@ -17,7 +17,7 @@
 
 // Constants
 #define ALARM_TEMP -150.0
-#define DEFAULT_LOG_INTERVAL 600
+#define DEFAULT_LOG_INTERVAL 600 //10분
 
 // Global variables
 ModbusRTU mb;
@@ -26,7 +26,12 @@ HardwareSerial ModbusSerial(2);  // UART2 사용
 float currentTemp = 0.0;
 bool isAlarmActive = false;
 std::vector<AlarmEvent> alarmEvents;
-Config config;
+Config config = {
+    "YourSSID",      // Default SSID
+    "YourPassword",  // Default Password
+    10               // Default Log Interval
+    -150             // Alarm temperature threshold 
+};
 
 // WiFi and NTP settings
 const char* ntpServer = "pool.ntp.org";
